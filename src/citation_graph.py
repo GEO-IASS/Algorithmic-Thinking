@@ -96,7 +96,12 @@ plt.figure()
 
 plt.subplot(121)
 plt.loglog(*zip(*pairs))
+plt.title("citation graph")
+plt.xlabel("in-degree")
+plt.ylabel("distribution-value")
 plt.subplot(122)
+plt.title("ER graph")
+plt.xlabel("in-degree")
 plt.loglog(*zip(*er_pairs))
 plt.show()
 
