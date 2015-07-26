@@ -33,7 +33,7 @@ def plot_clusters(data_table, cluster_list, draw_centers = False):
     fips_to_line = {}
     for line_idx in range(len(data_table)):
         fips_to_line[data_table[line_idx][0]] = line_idx
-     
+
     # Load map image
     map_file = urllib2.urlopen(MAP_URL)
     map_img = plt.imread(map_file)
@@ -45,7 +45,7 @@ def plot_clusters(data_table, cluster_list, draw_centers = False):
     yinch = ypixels / DPI
     plt.figure(figsize=(xinch,yinch))
     implot = plt.imshow(map_img)
-   
+
     # draw the counties colored by cluster on the map
     if not draw_centers:
         for cluster_idx in range(len(cluster_list)):
@@ -56,7 +56,7 @@ def plot_clusters(data_table, cluster_list, draw_centers = False):
                 plt.scatter(x = [line[1]], y = [line[2]], s =  circle_area(line[3]), lw = 1,
                             facecolors = cluster_color, edgecolors = cluster_color)
 
-    # add cluster centers and lines from center to counties            
+    # add cluster centers and lines from center to counties
     else:
         for cluster_idx in range(len(cluster_list)):
             cluster = cluster_list[cluster_idx]

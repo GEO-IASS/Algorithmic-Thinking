@@ -80,6 +80,16 @@ def sequential_clustering(singleton_list, num_clusters):
 
     return cluster_list
 
+#####################################################################
+# Code to computer the error of each cluster_list
+#
+
+def compute_distortion(cluster_list,data_table):
+    error_list = list()
+    num = len(cluster_list)
+    for tmp in xrange(num):
+        error_list.append(cluster_list[tmp].cluster_error(data_table))
+    return sum(error_list)
 
 #####################################################################
 # Code to load cancer data, compute a clustering and
@@ -93,7 +103,7 @@ def run_example():
 
     Set DESKTOP = True/False to use either matplotlib or simplegui
     """
-    data_table = load_data_table(DATA_3108_URL)
+    data_table = load_data_table(DATA_111_URL)
 
     singleton_list = []
     for line in data_table:
@@ -104,15 +114,16 @@ def run_example():
 
     #cluster_list = alg_project3_solution.hierarchical_clustering(singleton_list, 9)
     #print "Displaying", len(cluster_list), "hierarchical clusters"
+    #print compute_distortion(cluster_list,data_table)
 
     cluster_list = alg_project3_solution.kmeans_clustering(singleton_list, 9, 5)
     print "Displaying", len(cluster_list), "k-means clusters"
-
+    print compute_distortion(cluster_list,data_table)
 
     # draw the clusters using matplotlib or simplegui
     if DESKTOP:
-        alg_clusters_matplotlib.plot_clusters(data_table, cluster_list, False)
-        #alg_clusters_matplotlib.plot_clusters(data_table, cluster_list, True)  #add cluster centers
+        #alg_clusters_matplotlib.plot_clusters(data_table, cluster_list, False)
+        alg_clusters_matplotlib.plot_clusters(data_table, cluster_list, True)  #add cluster centers
     else:
         alg_clusters_simplegui.PlotClusters(data_table, cluster_list)   # use toggle in GUI to add cluster centers
 
